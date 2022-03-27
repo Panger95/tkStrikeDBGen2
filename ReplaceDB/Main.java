@@ -1,11 +1,11 @@
 package ReplaceDB;
 
+import java.util.concurrent.TimeUnit;
 import java.io.File;
 import java.io.IOException;
 
 public class Main {
-	public static void main(String[] args)
-	{
+	public static void main(String[] args) throws InterruptedException {
 
 		/**
 		*
@@ -22,47 +22,88 @@ public class Main {
 		*
 		**/
 
-		// full file path
-		File file1 = new File("/Users/Andrew/.tkStrike/db/tkStrike30.mv.db");
-		System.out.println("[File] : " + file1);
-		printFilePath(file1);
-
-		// a file name
-		File file2 = new File("tkStrike30.mv.db");
-		System.out.println("\n[File] : " + file2);
-		printFilePath(file2);
-
-		// a file contain `..`
-		File file4 = new File("/../tkStrike30.mv.db");
-		System.out.println("\n[File] : " + file4);
-		printFilePath(file4);
+		if (getOperatingSystem().contains("Mac")) {
+			ProcessHandle
+				.allProcesses()
+				.filter(p -> p.info().commandLine().map(c -> c.contains("tkStrikeGen2")).orElse(false))
+				.findFirst()
+					.ifPresent(ProcessHandle::destroy);
+			TimeUnit.SECONDS.sleep(3);
+			new File("\"" + "/Users/" + username() + "/.tkStrike/db/tkStrike30.mv.db" + "\"").delete();
+			executeCommand("open /Applications/tkStrikeGen2.app");
+			TimeUnit.SECONDS.sleep(25);
+			ProcessHandle
+					.allProcesses()
+					.filter(p -> p.info().commandLine().map(c -> c.contains("tkStrikeGen2")).orElse(false))
+					.findFirst()
+					.ifPresent(ProcessHandle::destroy);
+			TimeUnit.SECONDS.sleep(3);
+			String h2 = "/Applications/tkStrikeGen2.app/Contents/Java/lib/h2-1.4.199.jar";
+			String h2Command = " org.h2.tools.RunScript ";
+			String url = "\"" + "jdbc:h2:/Users/" + username() + "/.tkStrike/db/tkStrike30" + "\"";
+			String subcategory = "\"" + directory() + "/Subcategory.sql" + "\"";
+			String thresholds = "\"" + directory() + "/Default_Category_Thresholds.sql" + "\"";
+			String gap = "\"" + directory() + "/Default_Gap.sql" + "\"";
+			System.out.println("java -cp " + h2 + h2Command + "-url " + url + " -user SA -script " + subcategory);
+			executeCommand("java -cp " + h2 + h2Command + "-url " + url + " -user SA -script " + subcategory);
+			executeCommand("java -cp " + h2 + h2Command + "-url " + url + " -user SA -script " + thresholds);
+			executeCommand("java -cp " + h2 + h2Command + "-url " + url + " -user SA -script " + gap);
+			executeCommand("open /Applications/tkStrikeGen2.app");
+		} else if (getOperatingSystem().contains("Windows")) {
+			ProcessHandle
+					.allProcesses()
+					.filter(p -> p.info().commandLine().map(c -> c.contains("tkStrikeGen2")).orElse(false))
+					.findFirst()
+					.ifPresent(ProcessHandle::destroy);
+			TimeUnit.SECONDS.sleep(3);
+			new File("C:\\Users" + username() + "\\AppData\\Local\\tkStrikeGen2\\app\\db\\tkStrike30.mv.db").delete();
+			executeCommand("C:\\Users" + username()
+					+ "\\AppData\\Local\\tkStrikeGen2\\tkStrikeGen2.exe");
+			TimeUnit.SECONDS.sleep(25);
+			ProcessHandle
+					.allProcesses()
+					.filter(p -> p.info().commandLine().map(c -> c.contains("tkStrikeGen2")).orElse(false))
+					.findFirst()
+					.ifPresent(ProcessHandle::destroy);
+			TimeUnit.SECONDS.sleep(3);
+			String h2 = "\"" + "C:\\Users" + username() + "\\AppData\\Local\\tkStrikeGen2\\app\\lib\\h2-1.4.199.jar" + "\"";
+			String h2Command = " org.h2.tools.RunScript ";
+			String url = "\"" + "jdbc:h2:~\\AppData\\Local\\tkStrikeGen2\\app\\db\\tkStrike30" + "\"";
+			String subcategory = "\"" + directory() + "/Subcategory.sql" + "\"";
+			String thresholds = "\"" + directory() + "/Default_Category_Thresholds.sql" + "\"";
+			String gap = "\"" + directory() + "/Default_Gap.sql" + "\"";
+			System.out.println("java -cp " + h2 + h2Command + "-url " + url + " -user SA -script " + subcategory);
+			executeCommand("java -cp " + h2 + h2Command + "-url " + url + " -user SA -script " + subcategory);
+			executeCommand("java -cp " + h2 + h2Command + "-url " + url + " -user SA -script " + thresholds);
+			executeCommand("java -cp " + h2 + h2Command + "-url " + url + " -user SA -script " + gap);
+			executeCommand("C:\\Users" + username()
+					+ "\\AppData\\Local\\tkStrikeGen2\\tkStrikeGen2.exe");
+		} else {
+			System.out.println("YOU'VE DONE FUCKED UP, GO FUCK YOURSELF, I'M NOT MAKING THIS WORK FOR FUCKING UBUNTU/SOLARIS");
+		}
 	}
 
-	// If a single file name, not full path, the file refer to
-	// System.getProperty("user.dir") + file
-	static void printFilePath(File file) {
-		// print File = print file.getPath()
-		System.out.printf("%-25s : %s%n", "file.getPath()", file.getPath());
-		System.out.printf("%-25s : %s%n", "file.getAbsolutePath()",
-				file.getAbsolutePath());
+	private static String getOperatingSystem() {
+		String os = System.getProperty("os.name");
+		return os;
+	}
+
+	private static String username() {
+		String username = System.getProperty("user.name");
+		return username.replace(" ", "\\ ");
+	}
+
+	private static String directory() {
+		String directory = System.getProperty("user.dir");
+		return directory.replace(" ", "\\ ");
+	}
+
+	private static void executeCommand(String command) {
 		try {
-			System.out.printf("%-25s : %s%n", "file.getCanonicalPath()",
-					file.getCanonicalPath());
-		} catch (IOException e) {
+			Process process = Runtime.getRuntime().exec(command);
+			process.waitFor();
+		} catch (IOException | InterruptedException e) {
 			e.printStackTrace();
 		}
-		System.out.printf("%-25s : %s%n", "Parent Path", getParentPath(file));
 	}
-
-	// if unable to get parent, try substring to get the parent folder.
-	private static String getParentPath(File file) {
-		if (file.getParent() == null) {
-			String absolutePath = file.getAbsolutePath();
-			return absolutePath.substring(0,
-					absolutePath.lastIndexOf(File.separator));
-		} else {
-			return file.getParent();
-		}
-	}
-
 }
