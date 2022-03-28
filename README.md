@@ -4,17 +4,9 @@ Loading the tkStrike H2 DB with proper information
 Loading the H2 Database
 =======================
 
-The structure ``ReplaceDB`` package is like this:
-  .
-  ├── Import Thresholds
-  │   ├── Default_Category_Thresholds.sql
-  │   ├── Default_Gap.sql
-  │   ├── ReplaceDB.jar
-  │   ├── Windows.jar
-  │   ├── default.bat
-  │   └── subcategory.sql
+The structure of ``ReplaceDB`` package is like this:
+```
   ├── LICENSE
-  ├── Makefile
   ├── Manifest.txt
   ├── README.md
   └── ReplaceDB
@@ -22,6 +14,7 @@ The structure ``ReplaceDB`` package is like this:
       ├── Main.java
       ├── Windows.class
       └── Windows.java
+```
 
 Build class
 -------------
