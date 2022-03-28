@@ -32,9 +32,9 @@ public class Main {
 			executeCommand("open //Applications//tkStrikeGen2.app");
 			TimeUnit.SECONDS.sleep(25);
 			ProcessHandle
-					.allProcesses()
-					.filter(p -> p.info().commandLine().map(c -> c.contains("tkStrikeGen2")).orElse(false))
-					.findFirst()
+				.allProcesses()
+				.filter(p -> p.info().commandLine().map(c -> c.contains("tkStrikeGen2")).orElse(false))
+				.findFirst()
 					.ifPresent(ProcessHandle::destroy);
 			TimeUnit.SECONDS.sleep(3);
 			String h2 = "/Applications/tkStrikeGen2.app/Contents/Java/lib/h2-1.4.199.jar";
@@ -47,6 +47,7 @@ public class Main {
 					directory() + "/Default_Category_Thresholds.sql" };
 			String[] gap = { "java", "-cp", h2, h2Command, "-url", "jdbc:h2:/Users/" + username()
 					+ "/.tkStrike/db/tkStrike30", "-user", "SA", "-script", directory() + "/Default_Gap.sql" };
+			TimeUnit.SECONDS.sleep(3);
 			runtime.exec(subcategory);
 			TimeUnit.SECONDS.sleep(1);
 			runtime.exec(thresholds);
@@ -91,7 +92,8 @@ public class Main {
 
 	private static void executeCommand(String command) {
 		try {
-			Runtime.getRuntime().exec(command);
+			Process process = Runtime.getRuntime().exec(command);
+			process.waitFor();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

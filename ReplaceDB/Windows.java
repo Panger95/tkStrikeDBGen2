@@ -1,7 +1,6 @@
 package ReplaceDB;
 
 import java.util.concurrent.TimeUnit;
-import java.io.File;
 
 public class Windows {
 	public static void main(String[] args) throws Exception {
