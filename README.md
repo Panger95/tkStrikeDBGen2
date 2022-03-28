@@ -4,8 +4,7 @@ Loading the tkStrike H2 DB with proper information
 Loading the H2 Database
 =======================
 
-The structure ``ReplaceDB`` package is like this: ::
-```
+The structure ``ReplaceDB`` package is like this:
   .
   ├── Import Thresholds
   │   ├── Default_Category_Thresholds.sql
@@ -23,11 +22,10 @@ The structure ``ReplaceDB`` package is like this: ::
       ├── Main.java
       ├── Windows.class
       └── Windows.java
-```
 
 Build class
 -------------
-To easily compile and test run the makefile, execute the following command: ::
+To easily compile and test run the makefile, execute the following command:
 
   make
 
@@ -36,7 +34,7 @@ This generates all the necesary assests and places them in the proper directory.
 Compile class
 -------------
 
-For compile the main class for package, execute the follow command: ::
+For compile the main class for package, execute the follow command:
 
   javac HelloWorld/Main.java
 
@@ -45,7 +43,7 @@ This generate the ``Main.class`` and ``Windows.class`` files into ``ReplaceDB`` 
 Run class
 ---------
 
-For run the main class for package, execute the follow command: ::
+For run the main class for package, execute the follow command:
 
   java -cp . ReplaceDB.Main
   java -cp . ReplaceDB.Windows
@@ -53,7 +51,7 @@ For run the main class for package, execute the follow command: ::
 Create a JAR file
 -----------------
 
-For pack the main class for package as a JAR file, execute the follow command: ::
+For pack the main class for package as a JAR file, execute the follow command:
 
   jar cfme Import\ Thresholds/ReplaceDB.jar Manifest.txt ReplaceDB.Main ReplaceDB/Main.class
   jar cfme Import\ Thresholds/Windows.jar Manifest.txt ReplaceDB.Windows ReplaceDB/Windows.class
@@ -62,7 +60,7 @@ For pack the main class for package as a JAR file, execute the follow command: :
 Run a JAR file
 --------------
 
-For run the JAR file packed, execute the follow command: ::
+For run the JAR file packed, execute the follow command:
 
   java -jar ReplaceDB.jar
   java -jar Windows.jar
