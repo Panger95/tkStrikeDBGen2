@@ -1,19 +1,27 @@
 # tkStrikeDB
 Loading the tkStrike H2 DB with proper information
 
-example.java.helloworld
+Loading the H2 Database
 =======================
 
-This is "Hello World" Example for Java.
-
-The structure ``HelloWorld`` package is like this: ::
+The structure ``ReplaceDB`` package is like this: ::
 
   example.java.helloworld/
-  |-- HelloWorld
+  |-- ReplaceDB
   |   `-- Main.java
+  |   `-- Windows.java
   |-- LICENSE
+  |-- Makefile
   |-- Manifest.txt
   `-- README.md
+
+Build class
+-------------
+To easily compile and test run the makefile, execute the following command: ::
+
+  make
+
+This generates all the necesary assests and places them in the proper directory.
 
 Compile class
 -------------
@@ -22,23 +30,23 @@ For compile the main class for package, execute the follow command: ::
 
   javac HelloWorld/Main.java
 
-This generate the ``Main.class`` file into ``HelloWorld`` directory.
+This generate the ``Main.class`` and ``Windows.class`` files into ``ReplaceDB`` directory.
 
 Run class
 ---------
 
 For run the main class for package, execute the follow command: ::
 
-  java -cp . HelloWorld.Main
-
-This show the ``Hello world`` message.
+  java -cp . ReplaceDB.Main
+  java -cp . ReplaceDB.Windows
 
 Create a JAR file
 -----------------
 
 For pack the main class for package as a JAR file, execute the follow command: ::
 
-  jar cfme Main.jar Manifest.txt HelloWorld.Main HelloWorld/Main.class
+  jar cfme Import\ Thresholds/ReplaceDB.jar Manifest.txt ReplaceDB.Main ReplaceDB/Main.class
+  jar cfme Import\ Thresholds/Windows.jar Manifest.txt ReplaceDB.Windows ReplaceDB/Windows.class
 
 
 Run a JAR file
@@ -46,9 +54,8 @@ Run a JAR file
 
 For run the JAR file packed, execute the follow command: ::
 
-  java -jar Main.jar
-
-This show the ``Hello world`` message.
+  java -jar ReplaceDB.jar
+  java -jar Windows.jar
 
 Reference
 =========
