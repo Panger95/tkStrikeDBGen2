@@ -63,25 +63,32 @@ public class Main {
 		// } else {
 		// 	System.out.println("YOU'VE DONE FUCKED UP, GO FUCK YOURSELF, I'M NOT MAKING THIS WORK FOR FUCKING UBUNTU/SOLARIS");
 		// }
+
+		// Kill tkStrike if it is running
 		Runtime.getRuntime().exec("taskkill /F /IM tkStrikeGen2.exe");
+		// Pause the system for 3 seconds to finish the task kill
 		TimeUnit.SECONDS.sleep(3);
+		// Delete the bad tkStrike DB
 		new File("C:\\Users\\" + username() + "\\AppData\\Local\\tkStrikeGen2\\app\\db\\tkStrike30.mv.db").delete();
+		// Open tkStrike to reload an original copy of the DB
 		executeCommand("C:\\Users\\" + username() + "\\AppData\\Local\\tkStrikeGen2\\tkStrikeGen2.exe");
 	}
 
-	private static String getOperatingSystem() {
-		String os = System.getProperty("os.name");
-		return os;
-	}
+	// Return the operating system type, we only care about Windows
+	// private static String getOperatingSystem() {
+	// 	String os = System.getProperty("os.name");
+	// 	return os;
+	// }
 
+	// Return the username of the system and solve for spaces
 	private static String username() {
 		String username = System.getProperty("user.name");
-		if (getOperatingSystem().contains("Mac")) {
-			username.replace(" ", "\\ ");
-		} else if (getOperatingSystem().contains("Windows")) {
-			username.replace(" ", "^ ");
-		}
-		return username;
+		// if (getOperatingSystem().contains("Mac")) {
+		// 	username.replace(" ", "\\ ");
+		// } else if (getOperatingSystem().contains("Windows")) {
+		// 	username.replace(" ", "^ ");
+		// }
+		return username.replace(" ", "^ ");
 	}
 
 	// private static String directory() {
@@ -94,6 +101,7 @@ public class Main {
 	// 	return directory;
 	// }
 
+	// Execute commands better and more cleanly
 	private static void executeCommand(String command) {
 		try {
 			Runtime.getRuntime().exec(command);

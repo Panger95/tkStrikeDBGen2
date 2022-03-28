@@ -45,7 +45,7 @@ For run the main class for package, execute the follow command:
 Create a JAR file
 -----------------
 
-For pack the main class for package as a JAR file, execute the follow command:
+Pack the main class for package as a JAR file, execute the follow command:
 
   `jar cfme Import\ Thresholds/ReplaceDB.jar Manifest.txt ReplaceDB.Main ReplaceDB/Main.class`
 
@@ -55,11 +55,18 @@ For pack the main class for package as a JAR file, execute the follow command:
 Run a JAR file
 --------------
 
-For run the JAR file packed, execute the follow command:
+Run the JAR file packed, execute the follow command:
 
   `java -jar ReplaceDB.jar`
 
   `java -jar Windows.jar`
+
+Requirements
+------------
+
+Requires having Java installed on the system, the minimum requirement is Java 8 since it is packaged for released with Java 8 in mind.
+
+You can download Java 8 from the Java website: [Java Download](https://www.java.com/en/download/).
 
 Reference
 =========
