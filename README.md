@@ -18,9 +18,9 @@ The structure of ``ReplaceDB`` package is like this:
 
 Build class
 -------------
-To easily compile and test run the makefile, execute the following command:
+To easily compile and test run the jar file using the makefile, execute the following command:
 
-  make
+  #make
 
 This generates all the necesary assests and places them in the proper directory.
 
@@ -39,6 +39,7 @@ Run class
 For run the main class for package, execute the follow command:
 
   java -cp . ReplaceDB.Main
+
   java -cp . ReplaceDB.Windows
 
 Create a JAR file
@@ -47,6 +48,7 @@ Create a JAR file
 For pack the main class for package as a JAR file, execute the follow command:
 
   jar cfme Import\ Thresholds/ReplaceDB.jar Manifest.txt ReplaceDB.Main ReplaceDB/Main.class
+
   jar cfme Import\ Thresholds/Windows.jar Manifest.txt ReplaceDB.Windows ReplaceDB/Windows.class
 
 
@@ -56,6 +58,7 @@ Run a JAR file
 For run the JAR file packed, execute the follow command:
 
   java -jar ReplaceDB.jar
+
   java -jar Windows.jar
 
 Reference
