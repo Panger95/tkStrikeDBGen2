@@ -5,15 +5,25 @@ Loading the H2 Database
 =======================
 
 The structure ``ReplaceDB`` package is like this: ::
-
-  example.java.helloworld/
-  |-- ReplaceDB
-  |   `-- Main.java
-  |   `-- Windows.java
-  |-- LICENSE
-  |-- Makefile
-  |-- Manifest.txt
-  `-- README.md
+```
+  .
+  ├── Import Thresholds
+  │   ├── Default_Category_Thresholds.sql
+  │   ├── Default_Gap.sql
+  │   ├── ReplaceDB.jar
+  │   ├── Windows.jar
+  │   ├── default.bat
+  │   └── subcategory.sql
+  ├── LICENSE
+  ├── Makefile
+  ├── Manifest.txt
+  ├── README.md
+  └── ReplaceDB
+      ├── Main.class
+      ├── Main.java
+      ├── Windows.class
+      └── Windows.java
+```
 
 Build class
 -------------
@@ -60,7 +70,6 @@ For run the JAR file packed, execute the follow command: ::
 Reference
 =========
 
-- `java - How to run a JAR file - Stack Overflow <http://stackoverflow.com/questions/1238145/how-to-run-a-jar-file>`_.
+- [java - How to run a JAR file - Stack Overflow](http://stackoverflow.com/questions/1238145/how-to-run-a-jar-file).
 
-- `Setting an Application's Entry Point (The Java™ Tutorials > Deployment > Packaging Programs in JAR Files) <http://docs.oracle.com/javase/tutorial/deployment/jar/appman.html>`_.
-
+- [Setting an Application's Entry Point (The Java™ Tutorials > Deployment > Packaging Programs in JAR Files](http://docs.oracle.com/javase/tutorial/deployment/jar/appman.html).
