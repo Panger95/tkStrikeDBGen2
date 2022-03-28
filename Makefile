@@ -10,5 +10,5 @@ run:
 	cd Import\ Thresholds && java -jar ReplaceDB.jar
 
 test:
-	javac ReplaceDB/Main.java
-	java -cp . ReplaceDB.Main
+	javac ReplaceDB/Windows.java
+	java -cp . ReplaceDB.Windows

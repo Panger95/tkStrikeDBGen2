@@ -4,7 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Windows {
 	public static void main(String[] args) throws Exception {
-        // Task kill tkStrike
+        // Kill tkStrike
 		Runtime.getRuntime().exec("taskkill /F /IM tkStrikeGen2.exe");
         // Start a new thread process
 		Runtime runtime = Runtime.getRuntime();
@@ -54,7 +54,7 @@ public class Windows {
         // } else if (getOperatingSystem().contains("Windows")) {
         //     username.replace(" ", "^ ");
         // }
-        return username.replace(" ", "^ ");
+        return username;
     }
 
     // Return the current directory of the file and solve for spaces
@@ -65,7 +65,7 @@ public class Windows {
         // } else if (getOperatingSystem().contains("Windows")) {
         //     directory.replace(" ", "^ ");
         // }
-        return directory.replace(" ", "^ ");
+        return directory;
     }
 
     // Execute commands better and more cleanly

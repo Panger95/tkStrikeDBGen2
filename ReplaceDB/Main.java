@@ -88,7 +88,7 @@ public class Main {
 		// } else if (getOperatingSystem().contains("Windows")) {
 		// 	username.replace(" ", "^ ");
 		// }
-		return username.replace(" ", "^ ");
+		return username;
 	}
 
 	// private static String directory() {
