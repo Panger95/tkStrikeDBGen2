@@ -1,4 +1,4 @@
-# tkStrikeDB
+# tkStrikeDBGen2
 Loading the tkStrike H2 DB with proper information
 
 Loading the H2 Database
