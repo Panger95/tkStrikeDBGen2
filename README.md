@@ -47,9 +47,9 @@ Create a JAR file
 
 Pack the main class for package as a JAR file, execute the follow command:
 
-  `jar cfme Import\ Thresholds/ReplaceDB.jar Manifest.txt ReplaceDB.Main ReplaceDB/Main.class`
+  `jar cfme Import\ Thresholds\ Gen\ 2/ReplaceDB.jar Manifest.txt ReplaceDB.Main ReplaceDB/Main.class`
 
-  `jar cfme Import\ Thresholds/Windows.jar Manifest.txt ReplaceDB.Windows ReplaceDB/Windows.class`
+  `jar cfme Import\ Thresholds\ Gen\ 2/Windows.jar Manifest.txt ReplaceDB.Windows ReplaceDB/Windows.class`
 
 
 Run a JAR file
