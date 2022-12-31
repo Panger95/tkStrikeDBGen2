@@ -6,14 +6,22 @@ Loading the H2 Database
 
 The structure of ``ReplaceDB`` package is like this:
 ```
-  ├── LICENSE
-  ├── Manifest.txt
-  ├── README.md
-  └── ReplaceDB
-      ├── Main.class
-      ├── Main.java
-      ├── Windows.class
-      └── Windows.java
+├── Import Thresholds Gen 2
+│   ├── Default_Category_Thresholds.sql
+│   ├── Default_Gap.sql
+│   ├── ReplaceDB.jar
+│   ├── Windows.jar
+│   ├── default.bat
+│   └── subcategory.sql
+├── LICENSE
+├── Makefile
+├── Manifest.txt
+├── README.md
+└── ReplaceDB
+    ├── Main.class
+    ├── Main.java
+    ├── Windows.class
+    └── Windows.java
 ```
 
 Build class
