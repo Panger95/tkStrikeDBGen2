@@ -16,7 +16,7 @@ public class Windows {
 		String url = "jdbc:h2:~//AppData\\Local\\tkStrikeGen2\\app\\db\\tkStrike30";
         // Save the commands to replace the subcategory table
 		String[] subcategory = { "java", "-cp", h2, h2Command, "-url", url, "-user", "SA", "-script",
-				directory() + "/subcategory.sql" };
+				directory() + "/Subcategory.sql" };
         // Save the commands to replace the thresholds table
 		String[] thresholds = { "java", "-cp", h2, h2Command, "-url", url, "-user", "SA", "-script",
 				directory() + "/Default_Category_Thresholds.sql" };

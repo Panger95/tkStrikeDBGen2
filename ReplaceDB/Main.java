@@ -14,10 +14,10 @@ public class Main {
 		* Step 4: Wait 25 seconds for tkStrike to open and reload the DB
 		* Step 5: Kill tkStrike
 		* Step 6: Wait 3 seconds for tkStrike to quit
-		* Step 7: Run the subcategory sql script in the file location with H2
-		* Step 8: Run the default_category sql script in the file location with H2
-		* Step 9: Run the default_gap sql script in the file location with H2
-		* Step 10: Open tkStrike
+		* Step 7: Run the Subcategory sql script in the file location with H2
+		* Step 8: Run the Default_Category sql script in the file location with H2
+		* Step 9: Run the Default_Gap sql script in the file location with H2
+		* Step 10: Open tkStrikeGen2
 		*
 		**/
 
@@ -41,7 +41,7 @@ public class Main {
 		// 	String h2Command = "org.h2.tools.RunScript";
 		// 	Runtime runtime = Runtime.getRuntime();
 		// 	String[] subcategory = { "java", "-cp", h2, h2Command, "-url", "jdbc:h2:/Users/" + username()
-		// 			+ "/.tkStrike/db/tkStrike30", "-user", "SA", "-script", directory() + "/subcategory.sql" };
+		// 			+ "/.tkStrike/db/tkStrike30", "-user", "SA", "-script", directory() + "/Subcategory.sql" };
 		// 	String[] thresholds = { "java", "-cp", h2, h2Command, "-url", "jdbc:h2:/Users/" + username()
 		// 			+ "/.tkStrike/db/tkStrike30", "-user", "SA", "-script",
 		// 			directory() + "/Default_Category_Thresholds.sql" };
