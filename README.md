@@ -29,7 +29,7 @@ Compile class
 
 For compile the main class for package, execute the follow command:
 
-  `javac HelloWorld/Main.java`
+  `javac ReplaceDB/Main.java`
 
 This generate the ``Main.class`` and ``Windows.class`` files into ``ReplaceDB`` directory.
 
