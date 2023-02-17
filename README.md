@@ -158,7 +158,7 @@ You can download Java 8 from the Java website: [Java Download](https://www.java.
 
 Requires Node to be installed on the system, the minimum requirement is NodeJS v14.16 since that is what the javascript file is written with in mind.
 
-You can download the latest version of NodeJS from the Node website: [NodeJS Download](https://nodejs.org/en/download/)
+You can download the latest version of NodeJS from the Node website: [NodeJS Download](https://nodejs.org/en/download/).
 
 Reference
 =========
