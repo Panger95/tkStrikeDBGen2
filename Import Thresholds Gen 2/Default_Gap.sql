@@ -2,17 +2,17 @@ DROP TABLE IF EXISTS TKS_DIFFERENTIAL_SCORE_DEF;
 CREATE TABLE TKS_DIFFERENTIAL_SCORE_DEF(ID VARCHAR(45) NOT NULL PRIMARY KEY,VERSION INTEGER,PHASE_ID VARCHAR(45) NOT NULL,SUBCATEGORY_ID VARCHAR(45) NOT NULL,THE_VALUE INTEGER DEFAULT 0);
 INSERT INTO TKS_DIFFERENTIAL_SCORE_DEF VALUES
 -- WT SENIOR
-('1','06','6',99),
-('2','07','6',99),
-('3','08','6',99),
-('4','11','6',99),
+('1',0,'06','6',99),
+('2',0,'07','6',99),
+('3',0,'08','6',99),
+('4',0,'11','6',99),
 -- OLYMPIC
-('5','06','9',99),
-('6','07','9',99),
-('7','08','9',99),
-('8','11','9',99),
+('5',0,'06','9',99),
+('6',0,'07','9',99),
+('7',0,'08','9',99),
+('8',0,'11','9',99),
 -- SENIOR MIN
-('9','06','12',99),
-('10','07','12',99),
-('11','08','12',99),
-('12','11','12',99);
+('9',0,'06','12',99),
+('10',0,'07','12',99),
+('11',0,'08','12',99),
+('12',0,'11','12',99);

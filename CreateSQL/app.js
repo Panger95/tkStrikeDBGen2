@@ -65,13 +65,13 @@ async function replaceGap() {
     rl.on('line', line => {
         if (hashmap.has(line.trim().toUpperCase())) {
             output += `-- ${line.trim().toUpperCase()}\n`;
-            output += `('${count}','06','${hashmap.get(line.trim().toUpperCase())}',99),\n`;
+            output += `('${count}',0,'06','${hashmap.get(line.trim().toUpperCase())}',99),\n`;
             count++;
-            output += `('${count}','07','${hashmap.get(line.trim().toUpperCase())}',99),\n`;
+            output += `('${count}',0,'07','${hashmap.get(line.trim().toUpperCase())}',99),\n`;
             count++;
-            output += `('${count}','08','${hashmap.get(line.trim().toUpperCase())}',99),\n`;
+            output += `('${count}',0,'08','${hashmap.get(line.trim().toUpperCase())}',99),\n`;
             count++;
-            output += `('${count}','11','${hashmap.get(line.trim().toUpperCase())}',99),\n`;
+            output += `('${count}',0,'11','${hashmap.get(line.trim().toUpperCase())}',99),\n`;
             count++;
         }
     })
