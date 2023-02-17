@@ -1,0 +1,19 @@
+{
+  "name": "createsql",
+  "version": "1.0.0",
+  "description": "Create the necessary SQL files",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Panger95/tkStrikeDBGen2/CreateSQL"
+  },
+  "author": "Andrew Pang",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.16"
+  }
+}
