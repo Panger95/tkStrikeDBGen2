@@ -105,7 +105,7 @@ async function replaceThresholds() {
             let gender = name[j].slice(0, -4);
             output += `-- ${key.toUpperCase()} ${gender.toUpperCase()}\n`;
             for await (let line of rl) {
-                output += `('${count.toString().padStart(3, '0')}',0,'${line.split(',')[0].trim()}','${gender}','${value}',${line.split(',')[1].trim()},5),\n`;
+                output += `('${count.toString().padStart(3, '0')}',0,'${line.split(',')[0].trim().toUpperCase()}','${gender.toUpperCase()}','${value}',${line.split(',')[1].trim()},5),\n`;
                 count++;
             }
         }
