@@ -1,31 +1,39 @@
+OS := $(shell uname)
+
+ifeq ($(OS),Darwin)
+	JAVA_CMD := java
+else
+	JAVA_CMD := java -jar
+endif
+
 all: build run
 
 build:
 	javac --release 8 ReplaceDB/Main.java
 	javac --release 8 ReplaceDB/Windows.java
 	javac --release 8 ReplaceDB/Mac.java
-	jar cfme Import\ Thresholds\ Gen\ 2/ReplaceDB.jar Manifest.txt ReplaceDB.Main ReplaceDB/Main.class
-	jar cfme Import\ Thresholds\ Gen\ 2/Windows.jar Manifest.txt ReplaceDB.Windows ReplaceDB/Windows.class
-	jar cfme Import\ Thresholds\ Gen\ 2/Mac.jar Manifest.txt ReplaceDB.Mac ReplaceDB/Mac.class
+	jar cfme "Import Thresholds Gen 2/ReplaceDB.jar" Manifest.txt ReplaceDB.Main ReplaceDB/Main.class
+	jar cfme "Import Thresholds Gen 2/Windows.jar" Manifest.txt ReplaceDB.Windows ReplaceDB/Windows.class
+	jar cfme "Import Thresholds Gen 2/Mac.jar" Manifest.txt ReplaceDB.Mac ReplaceDB/Mac.class
 	cd CreateSQL && node app.js
 
 run:
-	cd Import\ Thresholds\ Gen\ 2 && java -jar ReplaceDB.jar
+	cd "Import Thresholds Gen 2" && $(JAVA_CMD) ReplaceDB.jar
 	sleep 25
-	@if [ $$(uname) = "Darwin" ]; then \
-		cd Import\ Thresholds\ Gen\ 2 && java -jar Mac.jar; \
-	elif [ $$(uname) = "Windows_NT" ]; then \
-		cd Import\ Thresholds\ Gen\ 2 && java -jar Windows.jar; \
+	@if [ "$(OS)" == "Darwin" ]; then \
+		cd "Import Thresholds Gen 2" && $(JAVA_CMD) Mac.jar; \
+	elif [ "$(OS)" == "Windows_NT" ]; then \
+		cd "Import Thresholds Gen 2" && $(JAVA_CMD) Windows.jar; \
 	fi
 
 test:
 	javac --release 8 ReplaceDB/Main.java
 	java -cp . ReplaceDB.Main
 	sleep 25
-	@if [ $$(uname) = "Darwin" ]; then \
+	@if [ "$(OS)" == "Darwin" ]; then \
 		javac --release 8 ReplaceDB/Mac.java; \
 		java -cp . ReplaceDB.Mac; \
-	elif [ $$(uname) = "Windows_NT" ]; then \
+	elif [ "$(OS)" == "Windows_NT" ]; then \
 		javac --release 8 ReplaceDB/Windows.java; \
 		java -cp . ReplaceDB.Windows; \
 	fi
