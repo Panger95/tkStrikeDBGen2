@@ -2,26 +2,26 @@ package ReplaceDB;
 
 import java.io.File;
 
-public class Windows {
+public class Mac {
     public static void main(String[] args) throws Exception {
 
         /**
          *
          * Step 1: Kill tkStrike
          * Step 2: Wait for the task to be finished
-         * Step 3: Run the Subcategory SQL script in the file location with H2
+         * Step 3: Run the Subcategory sql script in the file location with H2
          * Step 4: Wait for the task to be finished
-         * Step 5: Run the Default_Category_Thresholds SQL script in the file location
+         * Step 5: Run the Default_Category_Thresholds sql script in the file location
          * with H2
          * Step 6: Wait for the task to be finished
-         * Step 7: Run the Default_Gap SQL script in the file location with H2
+         * Step 7: Run the Default_Gap sql script in the file location with H2
          * Step 8: Wait for the task to be finished
-         * Step 9: Open tkStrikeGen2
+         * Step 6: Open tkStrikeGen2
          *
          **/
 
         // Kill tkStrike
-        Runtime.getRuntime().exec("taskkill /F /IM tkStrikeGen2.exe");
+        Runtime.getRuntime().exec("killall tkStrikeGen2");
         // Wait for the system to finish the task kill
         Thread.sleep(3000);
         // Replace the subcategory table in the running process thread
@@ -31,7 +31,7 @@ public class Windows {
         // Replace the gap table in the running process thread
         replaceTable("Default_Gap.sql");
         // Open tkStrike
-        executeCommand(getWindowsAppPath());
+        executeCommand("open", getMacAppPath());
     }
 
     // Replace a table using H2 Command Script
@@ -39,7 +39,7 @@ public class Windows {
         try {
             String h2 = h2Version();
             String h2Command = "org.h2.tools.RunScript";
-            String url = "jdbc:h2:~/AppData/Local/tkStrikeGen2/app/db/tkStrike30";
+            String url = "jdbc:h2:/Users/" + getUsername() + "/.tkStrike/db/tkStrike30";
             String[] command = { "java", "-cp", h2, h2Command, "-url", url, "-user", "SA", "-script",
                     getScriptPath(scriptName) };
             Process process = new ProcessBuilder(command).start();
@@ -49,21 +49,21 @@ public class Windows {
         }
     }
 
-    // Return the username of the system
+    // Return the username of the system and solve for spaces
     private static String getUsername() {
         String username = System.getProperty("user.name");
         return username;
     }
 
-    // Return the current directory of the file
+    // Return the current directory of the file and solve for spaces
     private static String getDirectory() {
         String directory = System.getProperty("user.dir");
         return directory;
     }
 
-    // Get the script file path
+    // Get the script file path with solved spaces
     private static String getScriptPath(String scriptName) {
-        return getDirectory() + File.separator + scriptName;
+        return getDirectory() + "/" + scriptName;
     }
 
     // Execute commands better and more cleanly
@@ -76,14 +76,14 @@ public class Windows {
         }
     }
 
-    // Get the Windows application path
-    private static String getWindowsAppPath() {
-        return "C:\\Users\\" + getUsername() + "\\AppData\\Local\\tkStrikeGen2\\tkStrikeGen2.exe";
+    // Get the Mac application path
+    private static String getMacAppPath() {
+        return "/Applications/tkStrikeGen2.app";
     }
 
     // Get the H2 DB file name
     private static String h2Version() {
-        String directoryPath = "C:\\Users\\" + getUsername() + "\\AppData\\Local\\tkStrikeGen2\\app\\lib\\";
+        String directoryPath = "/Applications/tkStrikeGen2.app/Contents/Java/lib/";
         File directory = new File(directoryPath);
         File[] files = directory.listFiles();
         for (File file : files) {

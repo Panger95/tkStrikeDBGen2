@@ -9,6 +9,9 @@ The structure of ``tkStrikeDBGen2`` package is like this:
 ├── CreateSQL
 │   ├── README.md
 │   ├── Subcategory
+│   │   ├── CADET
+│   │   │   ├── FEMALE.txt
+│   │   │   └── MALE.txt
 │   │   ├── CADET MIN
 │   │   │   ├── FEMALE.txt
 │   │   │   └── MALE.txt
@@ -33,22 +36,25 @@ The structure of ``tkStrikeDBGen2`` package is like this:
 │   │   ├── GEN1 KIDS 8-9
 │   │   │   ├── FEMALE.txt
 │   │   │   └── MALE.txt
-│   │   ├── GEN2 KIDS 8-9
+│   │   ├── JUNIOR
 │   │   │   ├── FEMALE.txt
 │   │   │   └── MALE.txt
 │   │   ├── JUNIOR MIN
 │   │   │   ├── FEMALE.txt
 │   │   │   └── MALE.txt
-│   │   ├── OLYMPIC
+│   │   ├── NEW CADET
 │   │   │   ├── FEMALE.txt
 │   │   │   └── MALE.txt
-│   │   ├── PARA
+│   │   ├── OLYMPIC
 │   │   │   ├── FEMALE.txt
 │   │   │   └── MALE.txt
 │   │   ├── PARA K41
 │   │   │   ├── FEMALE.txt
 │   │   │   └── MALE.txt
 │   │   ├── PARA K44
+│   │   │   ├── FEMALE.txt
+│   │   │   └── MALE.txt
+│   │   ├── SENIOR
 │   │   │   ├── FEMALE.txt
 │   │   │   └── MALE.txt
 │   │   ├── SENIOR MIN
@@ -60,19 +66,7 @@ The structure of ``tkStrikeDBGen2`` package is like this:
 │   │   ├── ULTRA
 │   │   │   ├── FEMALE.txt
 │   │   │   └── MALE.txt
-│   │   ├── WT CADET
-│   │   │   ├── FEMALE.txt
-│   │   │   └── MALE.txt
-│   │   ├── WT JUNIOR
-│   │   │   ├── FEMALE.txt
-│   │   │   └── MALE.txt
-│   │   ├── WT NEW CADET
-│   │   │   ├── FEMALE.txt
-│   │   │   └── MALE.txt
-│   │   ├── WT SENIOR
-│   │   │   ├── FEMALE.txt
-│   │   │   └── MALE.txt
-│   │   └── WT YOUTH
+│   │   └── YOUTH
 │   │       ├── FEMALE.txt
 │   │       └── MALE.txt
 │   ├── app.js
@@ -82,15 +76,19 @@ The structure of ``tkStrikeDBGen2`` package is like this:
 ├── Import Thresholds Gen 2
 │   ├── Default_Category_Thresholds.sql
 │   ├── Default_Gap.sql
+│   ├── Mac.jar
 │   ├── ReplaceDB.jar
 │   ├── Subcategory.sql
 │   ├── Windows.jar
-│   └── default.bat
+│   ├── default.bat
+│   └── default.sh
 ├── LICENSE
 ├── Makefile
 ├── Manifest.txt
 ├── README.md
 └── ReplaceDB
+    ├── Mac.class
+    ├── Mac.java
     ├── Main.class
     ├── Main.java
     ├── Windows.class
@@ -112,7 +110,7 @@ For compile the main class for package, execute the follow command:
 
   `javac ReplaceDB/Main.java`
 
-This generate the ``Main.class`` and ``Windows.class`` files into ``ReplaceDB`` directory.
+This generate the ``Main.class``, ``Mac.class``, and ``Windows.class`` files into ``ReplaceDB`` directory.
 
 Run class
 ---------
@@ -120,6 +118,8 @@ Run class
 For run the main class for package, execute the follow command:
 
   `java -cp . ReplaceDB.Main`
+
+  `java -cp . ReplaceDB.Mac`
 
   `java -cp . ReplaceDB.Windows`
 
@@ -129,6 +129,8 @@ Create a JAR file
 Pack the main class for package as a JAR file, execute the follow command:
 
   `jar cfme Import\ Thresholds\ Gen\ 2/ReplaceDB.jar Manifest.txt ReplaceDB.Main ReplaceDB/Main.class`
+
+  `jar cfme Import\ Thresholds\ Gen\ 2/Mac.jar Manifest.txt ReplaceDB.Mac ReplaceDB/Mac.class`
 
   `jar cfme Import\ Thresholds\ Gen\ 2/Windows.jar Manifest.txt ReplaceDB.Windows ReplaceDB/Windows.class`
 

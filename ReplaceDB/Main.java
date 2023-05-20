@@ -1,112 +1,95 @@
 package ReplaceDB;
 
-import java.util.concurrent.TimeUnit;
 import java.io.File;
 
 public class Main {
 	public static void main(String[] args) throws Exception {
 
 		/**
-		*
-		* Step 1: Find the location of tkStrike DB
-		* Step 2: Delete the tkStrike DB
-		* Step 3: Open tkStrike
-		* Step 4: Wait 25 seconds for tkStrike to open and reload the DB
-		* Step 5: Kill tkStrike
-		* Step 6: Wait 3 seconds for tkStrike to quit
-		* Step 7: Run the Subcategory sql script in the file location with H2
-		* Step 8: Run the Default_Category sql script in the file location with H2
-		* Step 9: Run the Default_Gap sql script in the file location with H2
-		* Step 10: Open tkStrikeGen2
-		*
-		**/
+		 *
+		 * Step 1: Kill tkStrike if it is running
+		 * Step 2: Find the location of tkStrike DB
+		 * Step 3: Delete the tkStrike DB
+		 * Step 4: Open tkStrike
+		 * Step 5: Wait as long as set in script file seconds for tkStrike to open and
+		 * reload the DB
+		 * Step 6: Run the specific OS program file to reload the DB
+		 *
+		 **/
 
-		// if (getOperatingSystem().contains("Mac")) {
-		// 	ProcessHandle
-		// 		.allProcesses()
-		// 		.filter(p -> p.info().commandLine().map(c -> c.contains("tkStrikeGen2")).orElse(false))
-		// 		.findFirst()
-		// 			.ifPresent(ProcessHandle::destroy);
-		// 	TimeUnit.SECONDS.sleep(3);
-		// 	new File("//Users//" + username() + "//.tkStrike//db//tkStrike30.mv.db").delete();
-		// 	executeCommand("open //Applications//tkStrikeGen2.app");
-		// 	TimeUnit.SECONDS.sleep(25);
-		// 	ProcessHandle
-		// 		.allProcesses()
-		// 		.filter(p -> p.info().commandLine().map(c -> c.contains("tkStrikeGen2")).orElse(false))
-		// 		.findFirst()
-		// 			.ifPresent(ProcessHandle::destroy);
-		// 	TimeUnit.SECONDS.sleep(3);
-		// 	String h2 = "/Applications/tkStrikeGen2.app/Contents/Java/lib/h2-1.4.199.jar";
-		// 	String h2Command = "org.h2.tools.RunScript";
-		// 	Runtime runtime = Runtime.getRuntime();
-		// 	String[] subcategory = { "java", "-cp", h2, h2Command, "-url", "jdbc:h2:/Users/" + username()
-		// 			+ "/.tkStrike/db/tkStrike30", "-user", "SA", "-script", directory() + "/Subcategory.sql" };
-		// 	String[] thresholds = { "java", "-cp", h2, h2Command, "-url", "jdbc:h2:/Users/" + username()
-		// 			+ "/.tkStrike/db/tkStrike30", "-user", "SA", "-script",
-		// 			directory() + "/Default_Category_Thresholds.sql" };
-		// 	String[] gap = { "java", "-cp", h2, h2Command, "-url", "jdbc:h2:/Users/" + username()
-		// 			+ "/.tkStrike/db/tkStrike30", "-user", "SA", "-script", directory() + "/Default_Gap.sql" };
-		// 	TimeUnit.SECONDS.sleep(3);
-		// 	runtime.exec(subcategory);
-		// 	TimeUnit.SECONDS.sleep(1);
-		// 	runtime.exec(thresholds);
-		// 	TimeUnit.SECONDS.sleep(1);
-		// 	runtime.exec(gap);
-		// 	TimeUnit.SECONDS.sleep(1);
-		// 	executeCommand("open //Applications//tkStrikeGen2.app");
-		// } else if (getOperatingSystem().contains("Windows")) {
-		// 	Runtime.getRuntime().exec("taskkill /F /IM tkStrikeGen2.exe");
-		// 	TimeUnit.SECONDS.sleep(3);
-		// 	new File("C:\\Users\\" + username() + "\\AppData\\Local\\tkStrikeGen2\\app\\db\\tkStrike30.mv.db").delete();
-		// 	executeCommand("C:\\Users\\" + username() + "\\AppData\\Local\\tkStrikeGen2\\tkStrikeGen2.exe");
-		// } else {
-		// 	System.out.println("YOU'VE DONE FUCKED UP, GO FUCK YOURSELF, I'M NOT MAKING THIS WORK FOR FUCKING UBUNTU/SOLARIS");
-		// }
-
-		// Kill tkStrike if it is running
-		Runtime.getRuntime().exec("taskkill /F /IM tkStrikeGen2.exe");
-		// Pause the system for 3 seconds to finish the task kill
-		TimeUnit.SECONDS.sleep(3);
-		// Delete the bad tkStrike DB
-		new File("C:\\Users\\" + username() + "\\AppData\\Local\\tkStrikeGen2\\app\\db\\tkStrike30.mv.db").delete();
-		// Open tkStrike to reload an original copy of the DB
-		executeCommand("C:\\Users\\" + username() + "\\AppData\\Local\\tkStrikeGen2\\tkStrikeGen2.exe");
+		if (isMac()) {
+			// Kill tkStrike if it is running
+			Runtime.getRuntime().exec("killall tkStrikeGen2");
+			// Wait for the system to finish the task kill
+			Thread.sleep(3000);
+			// Delete the bad tkStrike DB
+			deleteFile(getMacDBPath());
+			// Open tkStrike to reload an original copy of the DB
+			executeCommand("open", getMacAppPath());
+		} else if (isWindows()) {
+			// Kill tkStrike if it is running
+			Runtime.getRuntime().exec("taskkill /F /IM tkStrikeGen2.exe");
+			// Wait for the system to finish the task kill
+			Thread.sleep(3000);
+			// Delete the bad tkStrike DB
+			deleteFile(getWindowsDBPath());
+			// Open tkStrike to reload an original copy of the DB
+			executeCommand(getWindowsAppPath());
+		} else {
+			System.out.println("Unsupported operating system. Only Mac and Windows are supported.");
+		}
 	}
 
-	// Return the operating system type, we only care about Windows
-	// private static String getOperatingSystem() {
-	// 	String os = System.getProperty("os.name");
-	// 	return os;
-	// }
-
-	// Return the username of the system and solve for spaces
-	private static String username() {
-		String username = System.getProperty("user.name");
-		// if (getOperatingSystem().contains("Mac")) {
-		// 	username.replace(" ", "\\ ");
-		// } else if (getOperatingSystem().contains("Windows")) {
-		// 	username.replace(" ", "^ ");
-		// }
-		return username;
+	// Check if the operating system is Mac
+	private static boolean isMac() {
+		String osName = System.getProperty("os.name").toLowerCase();
+		return osName.contains("mac");
 	}
 
-	// private static String directory() {
-	// 	String directory = System.getProperty("user.dir");
-	// 	if (getOperatingSystem().contains("Mac")) {
-	// 		directory.replace(" ", "\\ ");
-	// 	} else if (getOperatingSystem().contains("Windows")) {
-	// 		directory.replace(" ", "^ ");
-	// 	}
-	// 	return directory;
-	// }
+	// Check if the operating system is Windows
+	private static boolean isWindows() {
+		String osName = System.getProperty("os.name").toLowerCase();
+		return osName.contains("win");
+	}
 
 	// Execute commands better and more cleanly
-	private static void executeCommand(String command) {
+	private static void executeCommand(String... command) {
 		try {
-			Runtime.getRuntime().exec(command);
+			ProcessBuilder processBuilder = new ProcessBuilder(command);
+			processBuilder.start();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	// Delete a file
+	private static void deleteFile(String filePath) {
+		File file = new File(filePath);
+		if (file.exists()) {
+			file.delete();
+		}
+	}
+
+	// Get the Mac DB path
+	private static String getMacDBPath() {
+		String username = System.getProperty("user.name");
+		return "/Users/" + username + "/.tkStrike/db/tkStrike30.mv.db";
+	}
+
+	// Get the Mac application path
+	private static String getMacAppPath() {
+		return "//Applications//tkStrikeGen2.app";
+	}
+
+	// Get the Windows DB path
+	private static String getWindowsDBPath() {
+		String username = System.getProperty("user.name");
+		return "C:\\Users\\" + username + "\\AppData\\Local\\tkStrikeGen2\\app\\db\\tkStrike30.mv.db";
+	}
+
+	// Get the Windows application path
+	private static String getWindowsAppPath() {
+		String username = System.getProperty("user.name");
+		return "C:\\Users\\" + username + "\\AppData\\Local\\tkStrikeGen2\\tkStrikeGen2.exe";
 	}
 }
