@@ -18,12 +18,12 @@ build:
 	cd CreateSQL && node app.js
 
 run:
-	cd "Import Thresholds Gen 2" && $(JAVA_CMD) ReplaceDB.jar
+	cd "Import Thresholds Gen 2" && $(JAVA_CMD) -cp ReplaceDB.jar ReplaceDB.Main
 	sleep 25
 	@if [ "$(OS)" == "Darwin" ]; then \
-		cd "Import Thresholds Gen 2" && $(JAVA_CMD) Mac.jar; \
+		cd "Import Thresholds Gen 2" && $(JAVA_CMD) -cp Mac.jar ReplaceDB.Mac; \
 	elif [ "$(OS)" == "Windows_NT" ]; then \
-		cd "Import Thresholds Gen 2" && $(JAVA_CMD) Windows.jar; \
+		cd "Import Thresholds Gen 2" && $(JAVA_CMD) -cp Windows.jar ReplaceDB.Windows; \
 	fi
 
 test:
