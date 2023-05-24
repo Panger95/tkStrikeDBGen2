@@ -78,7 +78,7 @@ public class Main {
 
 	// Get the Mac application path
 	private static String getMacAppPath() {
-		return "//Applications//tkStrikeGen2.app";
+		return "/Applications/tkStrikeGen2.app";
 	}
 
 	// Get the Windows DB path
