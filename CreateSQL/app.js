@@ -24,14 +24,14 @@ async function replaceSubcategory() {
     for await (let line of rl) {
         hashmap.set(line.trim().toUpperCase(), count);
         count++;
-    }
+    };
 
     for await (let name of directory) {
         if (!hashmap.has(name.trim().toUpperCase())) {
             hashmap.set(name.trim().toUpperCase(), count);
             count++;
-        }
-    }
+        };
+    };
 
     let size = hashmap.size - 1;
     output = `${DROP_SUBCATEGORY}\n${CREATE_SUBCATEGORY}\n${INSERT_SUBCATEGORY}\n`;
@@ -40,11 +40,10 @@ async function replaceSubcategory() {
             output += `('${value}',0,'${key}');`;
         } else {
             output += `('${value}',0,'${key}'),\n`;
-        }
-    }
+        };
+    };
     fs.writeFileSync('../Import\ Thresholds\ Gen\ 2/Subcategory.sql', output.trim());
 };
-await replaceSubcategory()
 
 async function replaceGap() {
     let filepath = 'gap.txt';
@@ -73,14 +72,13 @@ async function replaceGap() {
             count++;
             output += `('${count}',0,'11','${hashmap.get(line.trim().toUpperCase())}',99),\n`;
             count++;
-        }
+        };
     })
     .on('close', () => {
         let final = output.trim().slice(0, -1) + ';';
         fs.writeFileSync('../Import\ Thresholds\ Gen\ 2/Default_Gap.sql', final.trim());
-    })
-}
-await replaceGap();
+    });
+};
 
 async function replaceThresholds() {
     const DROP_CATEGORY = 'DROP TABLE IF EXISTS TKS_CATEGORY;';
@@ -107,10 +105,17 @@ async function replaceThresholds() {
             for await (let line of rl) {
                 output += `('${count.toString().padStart(3, '0')}',0,'${line.split(',')[0].trim().toUpperCase()}','${gender.toUpperCase()}','${value}',${line.split(',')[1].trim()},5),\n`;
                 count++;
-            }
-        }
+            };
+        };
         let final = output.trim().slice(0, -1) + ';';
         fs.writeFileSync('../Import\ Thresholds\ Gen\ 2/Default_Category_Thresholds.sql', final.trim());
-    }
+    };
+};
+
+async function main() {
+    await replaceSubcategory();
+    await replaceGap();
+    await replaceThresholds();
 }
-await replaceThresholds();
+
+main();
