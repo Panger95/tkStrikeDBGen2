@@ -21,9 +21,7 @@ public class Windows {
          **/
 
         // Kill tkStrike
-        Runtime.getRuntime().exec("taskkill /F /IM tkStrikeGen2.exe");
-        // Wait for the system to finish the task kill
-        Thread.sleep(3000);
+        exeCommand("taskkill", "/F", "/IM", "tkStrikeGen2.exe");
         // Replace the subcategory table in the running process thread
         replaceTable("Subcategory.sql");
         // Replace the thresholds table in the running process thread
@@ -31,7 +29,7 @@ public class Windows {
         // Replace the gap table in the running process thread
         replaceTable("Default_Gap.sql");
         // Open tkStrike
-        executeCommand(getWindowsAppPath());
+        exeCommand(getWindowsAppPath());
     }
 
     // Replace a table using H2 Command Script
@@ -42,8 +40,7 @@ public class Windows {
             String url = "jdbc:h2:~/AppData/Local/tkStrikeGen2/app/db/tkStrike30";
             String[] command = { "java", "-cp", h2, h2Command, "-url", url, "-user", "SA", "-script",
                     getScriptPath(scriptName) };
-            Process process = new ProcessBuilder(command).start();
-            process.waitFor();
+            exeCommand(command);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -67,10 +64,12 @@ public class Windows {
     }
 
     // Execute commands better and more cleanly
-    private static void executeCommand(String... command) {
+    private static void exeCommand(String... command) {
         try {
             ProcessBuilder processBuilder = new ProcessBuilder(command);
-            processBuilder.start();
+            Process process = processBuilder.start();
+            process.waitFor();
+            Thread.sleep(3000);
         } catch (Exception e) {
             e.printStackTrace();
         }
